@@ -21,7 +21,6 @@ export default function Home() {
       .then((user) => {
         const { avatar, username, email } = user;
         setUser(user);
-        // console.log(user);
       })
       .catch((err) => {
         console.log(err);
@@ -40,7 +39,7 @@ export default function Home() {
           <h1>Dev-twitter</h1>
           <h2>Talk about development with developers 👥</h2>
           <div>
-            {!user && (
+            {user === null && (
               <Button onClick={handleClick}>
                 <GitHub fill="#fff" width={32} height={24} /> Login with Github
               </Button>

@@ -37,6 +37,8 @@ export const onAuthStateChangedFunction = (onChange) => {
     if (user) {
       const normalizedUser = mapUserFromFirebaseAuthToUser(user);
       onChange(normalizedUser);
+    } else {
+      onChange(null);
     }
   });
 };
@@ -44,7 +46,5 @@ export const onAuthStateChangedFunction = (onChange) => {
 export const loginWithGitHub = async () => {
   const githubProvider = new GithubAuthProvider();
   githubProvider.setCustomParameters(firebaseConfig);
-  return signInWithPopup(auth, githubProvider).then(
-    mapUserFromFirebaseAuthToUser
-  );
+  return signInWithPopup(auth, githubProvider);
 };
