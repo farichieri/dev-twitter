@@ -1,10 +1,10 @@
-import { colors } from "../../../styles/theme";
+import { colors } from '../../../styles/theme'
 
-export default function Button({ children, onClick }) {
+export default function Button ({ children, onClick }) {
   return (
     <>
       <button onClick={onClick}>{children}</button>
-      <style jsx>{``}</style>
+      <style jsx>{''}</style>
       <style jsx>{`
         button {
           align-items: center;
@@ -28,5 +28,5 @@ export default function Button({ children, onClick }) {
         }
       `}</style>
     </>
-  );
+  )
 }

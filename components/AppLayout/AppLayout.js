@@ -1,4 +1,4 @@
-import styles, { globalStyles } from "./styles";
+import styles, { globalStyles } from './styles'
 
 const AppLayout = ({ children }) => (
   <>
@@ -10,6 +10,6 @@ const AppLayout = ({ children }) => (
       {globalStyles}
     </style>
   </>
-);
+)
 
-export default AppLayout;
+export default AppLayout

@@ -1,47 +1,46 @@
-import Head from "next/head";
-import AppLayout from "../components/AppLayout/AppLayout";
-import Button from "../components/AppLayout/Button";
-import GitHub from "../components/AppLayout/icons/Github";
-import { colors } from "../styles/theme";
+import Head from 'next/head'
+import AppLayout from '../components/AppLayout/AppLayout'
+import Button from '../components/AppLayout/Button'
+import GitHub from '../components/AppLayout/icons/Github'
+import { colors } from '../styles/theme'
 import {
   loginWithGitHub,
-  onAuthStateChangedFunction,
-} from "../firebase/client";
-import { useEffect, useState } from "react";
+  onAuthStateChangedFunction
+} from '../firebase/client'
+import { useEffect, useState } from 'react'
 
-export default function Home() {
-  const [user, setUser] = useState(undefined);
+export default function Home () {
+  const [user, setUser] = useState(undefined)
 
   useEffect(() => {
-    onAuthStateChangedFunction(setUser);
-  }, [user]);
+    onAuthStateChangedFunction(setUser)
+  }, [user])
 
   const handleClick = () => {
     loginWithGitHub()
       .then((user) => {
-        const { avatar, username, email } = user;
-        setUser(user);
+        setUser(user)
       })
       .catch((err) => {
-        console.log(err);
-      });
-  };
+        console.log(err)
+      })
+  }
   return (
     <>
       <Head>
         <title>dev-twitter 🦅</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel='icon' href='/favicon.ico' />
       </Head>
 
       <AppLayout>
         <section>
-          <img src="/dev-twitter-logo.png" alt="logo" />
+          <img src='/dev-twitter-logo.png' alt='logo' />
           <h1>Dev-twitter</h1>
           <h2>Talk about development with developers 👥</h2>
           <div>
             {user === null && (
               <Button onClick={handleClick}>
-                <GitHub fill="#fff" width={32} height={24} /> Login with Github
+                <GitHub fill='#fff' width={32} height={24} /> Login with Github
               </Button>
             )}
             {user && user.avatar && (
@@ -79,5 +78,5 @@ export default function Home() {
         }
       `}</style>
     </>
-  );
+  )
 }
