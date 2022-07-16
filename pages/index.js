@@ -1,14 +1,14 @@
+import { useEffect, useState } from "react";
 import Head from "next/head";
-import AppLayout from "../components/AppLayout/AppLayout";
-import Button from "../components/AppLayout/Button";
-import GitHub from "../components/AppLayout/icons/Github";
-import { colors } from "../styles/theme";
+import AppLayout from "components/AppLayout/AppLayout";
+import Avatar from "components/Avatar";
+import Button from "components/Button";
+import GitHub from "components/AppLayout/icons/Github";
+import { colors } from "styles/theme";
 import {
   loginWithGitHub,
   onAuthStateChangedFunction,
 } from "../firebase/client";
-import { useEffect, useState } from "react";
-import Avatar from "../Avatar";
 
 export default function Home() {
   const [user, setUser] = useState(undefined);
