@@ -8,6 +8,7 @@ import {
   onAuthStateChangedFunction,
 } from "../firebase/client";
 import { useEffect, useState } from "react";
+import Avatar from "../Avatar";
 
 export default function Home() {
   const [user, setUser] = useState(undefined);
@@ -45,8 +46,12 @@ export default function Home() {
             )}
             {user && user.avatar && (
               <div>
-                <img src={user.avatar} />
-                <strong>{user.username}</strong>
+                <Avatar
+                  src={user.avatar}
+                  alt={user.username}
+                  title={user.avatar}
+                  text={user.username}
+                />
               </div>
             )}
           </div>
