@@ -1,26 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Head from "next/head";
 import AppLayout from "components/AppLayout/AppLayout";
 import Button from "components/Button";
 import GitHub from "components/AppLayout/icons/Github";
 import { colors } from "styles/theme";
-import {
-  loginWithGitHub,
-  onAuthStateChangedFunction,
-} from "../firebase/client";
+import { loginWithGitHub } from "../firebase/client";
 import { useRouter } from "next/router";
-
-const USER_STATES = {
-  NOT_LOGGED: null,
-  NOT_KNOWN: undefined,
-};
+import useUser, { USER_STATES } from "hooks/useUser";
 
 export default function Home() {
-  const [user, setUser] = useState(USER_STATES.NOT_KNOWN);
+  const user = useUser();
   const router = useRouter();
 
   useEffect(() => {
-    onAuthStateChangedFunction(setUser);
     user && router.replace("/home");
   }, [user]);
 
@@ -29,6 +21,7 @@ export default function Home() {
       console.log(err);
     });
   };
+
   return (
     <>
       <Head>

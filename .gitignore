@@ -35,5 +35,6 @@ yarn-error.log*
 .env
 
 .eslintcache
-
-.husky
+/.husky
+package-lock.
+.prettierignore

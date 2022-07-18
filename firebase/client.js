@@ -21,11 +21,12 @@ initializeApp(firebaseConfig);
 const auth = getAuth();
 
 const mapUserFromFirebaseAuthToUser = (userInfo) => {
-  const { photoURL, email, displayName } = userInfo;
+  const { photoURL, email, displayName, uid } = userInfo;
   return {
     avatar: photoURL,
-    username: displayName,
+    userName: displayName,
     email,
+    uid,
   };
 };
 
@@ -48,3 +49,5 @@ export const loginWithGitHub = async () => {
   githubProvider.setCustomParameters(firebaseConfig);
   return signInWithPopup(auth, githubProvider);
 };
+
+export const addDevit = ({ avatar, content, userId, userName }) => {};

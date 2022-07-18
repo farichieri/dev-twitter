@@ -1,15 +1,18 @@
 import AppLayout from "components/AppLayout/AppLayout";
 import Devit from "components/Devit";
+import useUser from "hooks/useUser";
 import { useState, useEffect } from "react";
 
 export default function HomePage() {
   const [timeline, setTimeline] = useState(false);
+  const user = useUser();
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/statuses/home_timeline")
-      .then((res) => res.json())
-      .then(setTimeline);
-  }, []);
+    user &&
+      fetch("http://localhost:3000/api/statuses/home_timeline")
+        .then((res) => res.json())
+        .then(setTimeline);
+  }, [user]);
 
   return (
     <>
