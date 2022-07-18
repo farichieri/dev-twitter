@@ -1,6 +1,6 @@
 import AppLayout from "components/AppLayout/AppLayout";
 import Button from "components/Button";
-import { addDevit } from "firebase/client";
+import { addDevit } from "../../../firebase/client";
 import useUser from "hooks/useUser";
 import { useState } from "react";
 
