@@ -3,7 +3,7 @@ import Devit from "components/Devit";
 import { useState, useEffect } from "react";
 
 export default function HomePage() {
-  const [timeline, setTimeline] = useState([]);
+  const [timeline, setTimeline] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:3000/api/statuses/home_timeline")
@@ -18,45 +18,61 @@ export default function HomePage() {
           <h2>Inicio</h2>
         </header>
         <section>
-          {timeline.map(({ id, username, avatar, message }) => {
-            return (
-              <Devit
-                avatar={avatar}
-                id={id}
-                key={id}
-                message={message}
-                username={username}
-              />
-            );
-          })}
+          {!timeline ? (
+            <img src="/spinner.gif" alt="spinner" />
+          ) : (
+            timeline.map(({ id, username, avatar, message }) => {
+              return (
+                <Devit
+                  avatar={avatar}
+                  id={id}
+                  key={id}
+                  message={message}
+                  username={username}
+                />
+              );
+            })
+          )}
         </section>
         <nav>Nav</nav>
       </AppLayout>
       <style jsx>{`
         header {
-          display: flex;
           align-items: center;
-          width: 100%;
-          border-bottom: 1px solid #ccc;
+          backdrop-filter: blur(0.5px);
+          background: #ffffffee;
+          border-bottom: 1px solid #eee;
+          display: flex;
           height: 49px;
-          position: fixed;
+          position: sticky;
           top: 0;
+          width: 100%;
+          z-index: 1;
         }
         h2 {
           font-size: 21px;
           font-weight: 800;
+          padding-left: 15px;
         }
         section {
-          padding-top: 49px;
+          position: relative;
+        }
+        img {
+          left: 50%;
+          position: absolute;
+          top: 50%;
+          transform: translate(-50%, -50%);
         }
         nav {
-          display: flex;
           align-items: center;
-          width: 100%;
-          border-top: 1px solid #ccc;
+          background-color: #fff;
+          border-top: 1px solid #eee;
           bottom: 0;
+          display: flex;
           height: 49px;
-          position: fixed;
+          position: sticky;
+          width: 100%;
+          z-index: 1;
         }
       `}</style>
     </>
