@@ -1,4 +1,4 @@
-import Avatar from "components/Avatar";
+import Avatar from 'components/Avatar';
 
 export default function Devit({
   avatar,
@@ -17,7 +17,7 @@ export default function Devit({
           <header>
             <strong>{userName}</strong>
             <span> · </span>
-            <date>{createdAt}</date>
+            <div className='date'>{createdAt}</div>
           </header>
           <p>{content}</p>
         </section>
@@ -35,7 +35,7 @@ export default function Devit({
           line-height: 1.3125;
           margin: 0;
         }
-        date {
+        .date {
           color: #555;
           font-size: 14px;
         }
