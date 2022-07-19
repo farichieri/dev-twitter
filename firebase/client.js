@@ -10,6 +10,7 @@ import {
   addDoc,
   getFirestore,
   Timestamp,
+  getDocs,
 } from "firebase/firestore";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -66,5 +67,22 @@ export const addDevit = async ({ avatar, content, userId, userName }) => {
     createdAt: Timestamp.fromDate(new Date()),
     likesCount: 0,
     sharedCount: 0,
+  });
+};
+
+export const fetchLatestDevits = async () => {
+  return await getDocs(collection(db, "devits")).then((docs) => {
+    return docs.docs.map((doc) => {
+      const data = doc.data();
+      const id = doc.id;
+      const { createdAt } = data;
+      const date = new Date(createdAt.seconds * 1000);
+      const normalizedCreatedAt = new Intl.DateTimeFormat("es-ES").format(date);
+      return {
+        ...data,
+        id,
+        createdAt: normalizedCreatedAt,
+      };
+    });
   });
 };
