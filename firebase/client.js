@@ -5,6 +5,12 @@ import {
   signInWithPopup,
   onAuthStateChanged,
 } from "firebase/auth";
+import {
+  collection,
+  addDoc,
+  getFirestore,
+  Timestamp,
+} from "firebase/firestore";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -17,8 +23,9 @@ const firebaseConfig = {
   measurementId: "G-TKSJ01H2B0",
 };
 
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 const auth = getAuth();
+const db = getFirestore(app);
 
 const mapUserFromFirebaseAuthToUser = (userInfo) => {
   const { photoURL, email, displayName, uid } = userInfo;
@@ -50,4 +57,14 @@ export const loginWithGitHub = async () => {
   return signInWithPopup(auth, githubProvider);
 };
 
-export const addDevit = ({ avatar, content, userId, userName }) => {};
+export const addDevit = async ({ avatar, content, userId, userName }) => {
+  return await addDoc(collection(db, "devits"), {
+    avatar,
+    content,
+    userId,
+    userName,
+    createdAt: Timestamp.fromDate(new Date()),
+    likesCount: 0,
+    sharedCount: 0,
+  });
+};
