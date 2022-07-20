@@ -1,6 +1,6 @@
-import css from "styled-jsx/css";
-import { breakpoints, colors, fonts } from "../../styles/theme";
-import { addOpacityToColor } from "../../styles/utils";
+import css from 'styled-jsx/css';
+import { breakpoints, colors, fonts } from '../../styles/theme';
+import { addOpacityToColor } from '../../styles/utils';
 
 const backgroundColor = addOpacityToColor(colors.primary, 0.3);
 
@@ -29,6 +29,29 @@ export const globalStyles = css.global`
   * {
     box-sizing: border-box;
   }
+  /* Scrollbar */
+  /* Works on Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(61, 61, 61) rgba(164, 164, 164, 0.402);
+  }
+
+  /* Works on Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: rgba(164, 164, 164, 0.402);
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: rgb(61, 61, 61);
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  /* End Scrollbar */
 `;
 export default css`
   div {
@@ -47,7 +70,6 @@ export default css`
   @media (min-width: ${breakpoints.mobile}) {
     main {
       width: ${breakpoints.mobile};
-      height: 90vh;
     }
   }
 `;
