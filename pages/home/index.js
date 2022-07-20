@@ -1,15 +1,18 @@
-import AppLayout from "components/AppLayout/AppLayout";
-import Devit from "components/Devit";
-import { fetchLatestDevits } from "../../firebase/client";
-import useUser from "hooks/useUser";
-import { useState, useEffect } from "react";
+import AppLayout from 'components/AppLayout/AppLayout';
+import Devit from 'components/Devit';
+import { fetchLatestDevits } from '../../firebase/client';
+import useUser from 'hooks/useUser';
+import { useState, useEffect } from 'react';
 
 export default function HomePage() {
   const [timeline, setTimeline] = useState(false);
   const user = useUser();
 
   useEffect(() => {
-    user && fetchLatestDevits().then(setTimeline);
+    user &&
+      fetchLatestDevits().then((result) =>
+        setTimeline(result.sort((a, b) => b.createdAt - a.createdAt))
+      );
   }, [user]);
 
   return (
@@ -20,7 +23,7 @@ export default function HomePage() {
         </header>
         <section>
           {!timeline ? (
-            <img src="/spinner.gif" alt="spinner" />
+            <img src='/spinner.gif' alt='spinner' />
           ) : (
             timeline.map(({ userId, userName, avatar, content, createdAt }) => {
               return (

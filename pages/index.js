@@ -1,19 +1,19 @@
-import { useEffect } from "react";
-import Head from "next/head";
-import AppLayout from "components/AppLayout/AppLayout";
-import Button from "components/Button";
-import GitHub from "components/AppLayout/icons/Github";
-import { colors } from "styles/theme";
-import { loginWithGitHub } from "../firebase/client";
-import { useRouter } from "next/router";
-import useUser, { USER_STATES } from "hooks/useUser";
+import { useEffect } from 'react';
+import Head from 'next/head';
+import AppLayout from 'components/AppLayout/AppLayout';
+import Button from 'components/Button';
+import GitHub from 'components/Icons/Github';
+import { colors } from 'styles/theme';
+import { loginWithGitHub } from '../firebase/client';
+import { useRouter } from 'next/router';
+import useUser, { USER_STATES } from 'hooks/useUser';
 
 export default function Home() {
   const user = useUser();
   const router = useRouter();
 
   useEffect(() => {
-    user && router.replace("/home");
+    user && router.replace('/home');
   }, [user]);
 
   const handleClick = () => {
@@ -26,21 +26,21 @@ export default function Home() {
     <>
       <Head>
         <title>dev-twitter 🦅</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel='icon' href='/favicon.ico' />
       </Head>
 
       <AppLayout>
         <section>
-          <img src="/dev-twitter-logo.png" alt="logo" />
+          <img src='/dev-twitter-logo.png' alt='logo' />
           <h1>Dev-twitter</h1>
           <h2>Talk about development with developers 👥</h2>
           <div>
             {user === USER_STATES.NOT_LOGGED && (
               <Button onClick={handleClick}>
-                <GitHub fill="#fff" width={32} height={24} /> Login with Github
+                <GitHub fill='#fff' width={32} height={24} /> Login with Github
               </Button>
             )}
-            {user === USER_STATES.NOT_KNOWN && <img src="/spinner.gif" />}
+            {user === USER_STATES.NOT_KNOWN && <img src='/spinner.gif' />}
           </div>
         </section>
       </AppLayout>
