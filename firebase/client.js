@@ -12,7 +12,12 @@ import {
   Timestamp,
   getDocs,
 } from 'firebase/firestore';
-import { getStorage, ref, uploadBytes } from 'firebase/storage';
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  uploadBytesResumable,
+} from 'firebase/storage';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -89,8 +94,8 @@ export const fetchLatestDevits = async () => {
 
 const storage = getStorage();
 
-export const uploadImage = async (file) => {
-  const spaceRef = ref(storage, `/images/${file}`);
-  const task = await uploadBytes(spaceRef, file);
+export const uploadImage = (file) => {
+  const spaceRef = ref(storage, `/images/${file.name}`);
+  const task = uploadBytesResumable(spaceRef, file);
   return task;
 };

@@ -4,7 +4,12 @@ import { addDevit, uploadImage } from '../../../firebase/client';
 import useUser from 'hooks/useUser';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { getDownloadURL, getStorage, ref } from 'firebase/storage';
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytesResumable,
+} from 'firebase/storage';
 
 const COMPOSE_STATES = {
   USER_NOT_KNOWN: 0,
@@ -37,10 +42,9 @@ export default function ComposeTweet() {
       let onProgress = () => {};
       let onError = () => {};
       let onComplete = () => {
-        console.log('onComplete');
-        getDownloadURL(ref(storage, `/images/${file}`)).then(setImgURL);
+        getDownloadURL(task.snapshot.ref).then(setImgURL);
       };
-      // task.on('state_changed', onProgress, onError, onComplete);
+      task.on('state_changed', onProgress, onError, onComplete);
     }
   }, [task]);
 
@@ -85,7 +89,8 @@ export default function ComposeTweet() {
     setTask(task);
   };
 
-  const isButtonDisabled = !message.length || status === COMPOSE_STATES.LOADING;
+  const isButtonDisabled =
+    !message.length || status === COMPOSE_STATES.LOADING || !imgURL.length;
 
   return (
     <>
@@ -98,7 +103,12 @@ export default function ComposeTweet() {
             onChange={handleChange}
             placeholder={`What's happening?`}
           ></textarea>
-          {imgURL && <img src={imgURL} alt={imgURL} />}
+          {imgURL && (
+            <section>
+              <button onClick={() => setImgURL(null)}>x</button>
+              {imgURL && <img src={imgURL} alt={imgURL} />}
+            </section>
+          )}
           <div>
             <Button disabled={isButtonDisabled}>Devitear</Button>
           </div>
@@ -108,16 +118,47 @@ export default function ComposeTweet() {
         div {
           padding: 15px;
         }
+        form {
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+        }
+        section {
+          position: relative;
+        }
+        button {
+          align-items: center;
+          background: rgba(0, 0 ,0 , 0.3);
+          border-radius: 999px;
+          border: 0;
+          color: #fff;
+          cursor: pointer;
+          display: flex;
+          font-size: 15px;
+          height: 32px;
+          justify-content: center;
+          position: absolute;
+          right: 15px;
+          top: 15px;
+          width: 32px;
+        }
         textarea {
           border-radius: 10px;
-          border: ${drag === DRAG_IMAGE_STATES.DRAG_OVER
-            ? '3px dashed #09f'
-            : '3px dashed transparent'};
+          border: ${
+            drag === DRAG_IMAGE_STATES.DRAG_OVER
+              ? '3px dashed #09f'
+              : '3px dashed transparent'
+          };
           font-size: 21px;
           min-height: 200px;
           outline: 0;
           padding: 15px;
           resize: none;
+          width: 100%;
+        }
+        img {
+          height auto: ;
+          border-radius: 10px;
           width: 100%;
         }
       `}</style>
