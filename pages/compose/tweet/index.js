@@ -11,6 +11,7 @@ import {
   uploadBytesResumable,
 } from 'firebase/storage';
 import Head from 'next/head';
+import Avatar from 'components/Avatar';
 
 const COMPOSE_STATES = {
   USER_NOT_KNOWN: 0,
@@ -102,24 +103,30 @@ export default function ComposeTweet() {
         <Head>
           <title>Crear un Devit / Devter</title>
         </Head>
-        <form onSubmit={handleSubmit}>
-          <textarea
-            onDragEnter={handleDragEnter}
-            onDragLeave={handleDragLeave}
-            onDrop={handleDrop}
-            onChange={handleChange}
-            placeholder={`What's happening?`}
-          ></textarea>
-          {imgURL && (
-            <section>
-              <button onClick={() => setImgURL(null)}>x</button>
-              {imgURL && <img src={imgURL} alt={imgURL} />}
-            </section>
-          )}
-          <div>
-            <Button disabled={isButtonDisabled}>Devitear</Button>
-          </div>
-        </form>
+        <section className='form-container'>
+          <section className='avatar-container'>
+            {user && <Avatar src={user.avatar} />}
+          </section>
+          <form onSubmit={handleSubmit}>
+            <textarea
+              onDragEnter={handleDragEnter}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
+              onChange={handleChange}
+              placeholder={`What's happening?`}
+            ></textarea>
+            {imgURL && (
+              <section className='image'>
+                <button onClick={() => setImgURL(null)}>x</button>
+                {imgURL && <img src={imgURL} alt={imgURL} />}
+              </section>
+            )}
+
+            <div>
+              <Button disabled={isButtonDisabled}>Devitear</Button>
+            </div>
+          </form>
+        </section>
       </AppLayout>
       <style jsx>{`
         div {
@@ -130,7 +137,14 @@ export default function ComposeTweet() {
           justify-content: center;
           flex-direction: column;
         }
-        section {
+        .form-container{
+          display: flex;
+          align-items: flex-start;
+        }
+        .avatar-container {
+          padding: 20px 0 0 10px;
+        }
+        .image {
           position: relative;
         }
         button {

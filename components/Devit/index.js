@@ -20,7 +20,7 @@ export default function Devit({
           <header>
             <strong>{userName}</strong>
             <span> · </span>
-            <div className='date'>{timeago}</div>
+            <time className='date'>{timeago}</time>
           </header>
           <p>{content}</p>
           {img && <img src={img} />}
