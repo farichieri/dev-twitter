@@ -34,18 +34,21 @@ export default function HomePage() {
           {!timeline ? (
             <img src='/spinner.gif' alt='spinner' />
           ) : (
-            timeline.map(({ userId, userName, avatar, content, createdAt }) => {
-              return (
-                <Devit
-                  createdAt={createdAt}
-                  avatar={avatar}
-                  userId={userId}
-                  key={userId}
-                  content={content}
-                  userName={userName}
-                />
-              );
-            })
+            timeline.map(
+              ({ userId, userName, img, avatar, content, createdAt }) => {
+                return (
+                  <Devit
+                    createdAt={createdAt}
+                    avatar={avatar}
+                    img={img}
+                    userId={userId}
+                    key={userId}
+                    content={content}
+                    userName={userName}
+                  />
+                );
+              }
+            )
           )}
         </section>
         <nav>

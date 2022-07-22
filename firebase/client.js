@@ -64,10 +64,11 @@ export const loginWithGitHub = async () => {
   return signInWithPopup(auth, githubProvider);
 };
 
-export const addDevit = async ({ avatar, content, userId, userName }) => {
+export const addDevit = async ({ avatar, content, img, userId, userName }) => {
   return await addDoc(collection(db, 'devits'), {
     avatar,
     content,
+    img,
     userId,
     userName,
     createdAt: Timestamp.fromDate(new Date()),

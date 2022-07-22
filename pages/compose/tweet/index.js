@@ -10,6 +10,7 @@ import {
   ref,
   uploadBytesResumable,
 } from 'firebase/storage';
+import Head from 'next/head';
 
 const COMPOSE_STATES = {
   USER_NOT_KNOWN: 0,
@@ -61,6 +62,7 @@ export default function ComposeTweet() {
       content: message,
       userId: user.uid,
       userName: user.userName,
+      img: imgURL,
     })
       .then(() => {
         router.push('/home');
@@ -90,11 +92,16 @@ export default function ComposeTweet() {
   };
 
   const isButtonDisabled =
-    !message.length || status === COMPOSE_STATES.LOADING || !imgURL.length;
+    !message.length ||
+    status === COMPOSE_STATES.LOADING ||
+    (imgURL && !imgURL.length);
 
   return (
     <>
       <AppLayout>
+        <Head>
+          <title>Crear un Devit / Devter</title>
+        </Head>
         <form onSubmit={handleSubmit}>
           <textarea
             onDragEnter={handleDragEnter}

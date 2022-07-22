@@ -4,6 +4,7 @@ import useTimeAgo from 'hooks/useTimeAgo';
 export default function Devit({
   avatar,
   userId,
+  img,
   content,
   userName,
   createdAt,
@@ -22,6 +23,7 @@ export default function Devit({
             <div className='date'>{timeago}</div>
           </header>
           <p>{content}</p>
+          {img && <img src={img} />}
         </section>
       </article>
       <style jsx>{`
@@ -29,6 +31,15 @@ export default function Devit({
           border-bottom: 2px solid #eaf7ff;
           display: flex;
           padding: 10px 15px;
+        }
+        img {
+          border-radius: 10px;
+          height: auto;
+          width: 100%;
+        }
+        header {
+          display: flex;
+          gap: 0.5rem;
         }
         div {
           padding-right: 10px;
