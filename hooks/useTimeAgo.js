@@ -29,7 +29,7 @@ export default function useTimeAgo(timestamp) {
     return () => clearInterval(interval);
   }, [timestamp]);
 
-  const rtf = new Intl.RelativeTimeFormat(navigator.language, {
+  const rtf = new Intl.RelativeTimeFormat('es-ES', {
     style: 'long',
   });
 

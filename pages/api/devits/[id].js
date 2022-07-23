@@ -9,8 +9,10 @@ export default (request, response) => {
     .get()
     .then((doc) => {
       const data = doc.data();
+      const id = doc.id;
+      const { createdAt } = data;
       if (data) {
-        response.json(data);
+        response.json({ ...data, id, createdAt: +createdAt.toDate() });
       } else {
         response.status(404).end();
       }

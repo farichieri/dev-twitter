@@ -33,14 +33,15 @@ export default function HomePage() {
           <img src='/spinner.gif' alt='spinner' />
         ) : (
           timeline.map(
-            ({ userId, userName, img, avatar, content, createdAt }) => {
+            ({ userId, userName, img, avatar, content, createdAt, id }) => {
               return (
                 <Devit
+                  id={id}
                   createdAt={createdAt}
                   avatar={avatar}
                   img={img}
                   userId={userId}
-                  key={userId}
+                  key={id}
                   content={content}
                   userName={userName}
                 />
