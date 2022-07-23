@@ -12,12 +12,7 @@ import {
   Timestamp,
   getDocs,
 } from 'firebase/firestore';
-import {
-  getStorage,
-  ref,
-  uploadBytes,
-  uploadBytesResumable,
-} from 'firebase/storage';
+import { getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -32,7 +27,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
-const db = getFirestore(app);
+export const db = getFirestore(app);
 
 const mapUserFromFirebaseAuthToUser = (userInfo) => {
   const { photoURL, email, displayName, uid } = userInfo;
