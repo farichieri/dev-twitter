@@ -1,4 +1,3 @@
-import AppLayout from 'components/AppLayout/AppLayout';
 import Devit from 'components/Devit';
 import { fetchLatestDevits } from '../../firebase/client';
 import useUser from 'hooks/useUser';
@@ -23,52 +22,50 @@ export default function HomePage() {
 
   return (
     <>
-      <AppLayout>
-        <Head>
-          <title>Inicio / Devter</title>
-        </Head>
-        <header>
-          <h2>Inicio</h2>
-        </header>
-        <section>
-          {!timeline ? (
-            <img src='/spinner.gif' alt='spinner' />
-          ) : (
-            timeline.map(
-              ({ userId, userName, img, avatar, content, createdAt }) => {
-                return (
-                  <Devit
-                    createdAt={createdAt}
-                    avatar={avatar}
-                    img={img}
-                    userId={userId}
-                    key={userId}
-                    content={content}
-                    userName={userName}
-                  />
-                );
-              }
-            )
-          )}
-        </section>
-        <nav>
-          <Link href='/'>
-            <a>
-              <Home width={32} height={32} stroke='#09f' />
-            </a>
-          </Link>
-          <Link href='/'>
-            <a>
-              <Search width={32} height={32} stroke='#09f' />
-            </a>
-          </Link>
-          <Link href='/compose/tweet'>
-            <a>
-              <Create width={32} height={32} stroke='#09f' />
-            </a>
-          </Link>
-        </nav>
-      </AppLayout>
+      <Head>
+        <title>Inicio / Devter</title>
+      </Head>
+      <header>
+        <h2>Inicio</h2>
+      </header>
+      <section>
+        {!timeline ? (
+          <img src='/spinner.gif' alt='spinner' />
+        ) : (
+          timeline.map(
+            ({ userId, userName, img, avatar, content, createdAt }) => {
+              return (
+                <Devit
+                  createdAt={createdAt}
+                  avatar={avatar}
+                  img={img}
+                  userId={userId}
+                  key={userId}
+                  content={content}
+                  userName={userName}
+                />
+              );
+            }
+          )
+        )}
+      </section>
+      <nav>
+        <Link href='/'>
+          <a>
+            <Home width={32} height={32} stroke='#09f' />
+          </a>
+        </Link>
+        <Link href='/'>
+          <a>
+            <Search width={32} height={32} stroke='#09f' />
+          </a>
+        </Link>
+        <Link href='/compose/tweet'>
+          <a>
+            <Create width={32} height={32} stroke='#09f' />
+          </a>
+        </Link>
+      </nav>
       <style jsx>{`
         header {
           align-items: center;

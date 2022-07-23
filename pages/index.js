@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import Head from 'next/head';
-import AppLayout from 'components/AppLayout/AppLayout';
 import Button from 'components/Button';
 import GitHub from 'components/Icons/Github';
 import { colors } from 'styles/theme';
@@ -29,21 +28,19 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <AppLayout>
-        <section>
-          <img src='/dev-twitter-logo.png' alt='logo' />
-          <h1>Dev-twitter</h1>
-          <h2>Talk about development with developers 👥</h2>
-          <div>
-            {user === USER_STATES.NOT_LOGGED && (
-              <Button onClick={handleClick}>
-                <GitHub fill='#fff' width={32} height={24} /> Login with Github
-              </Button>
-            )}
-            {user === USER_STATES.NOT_KNOWN && <img src='/spinner.gif' />}
-          </div>
-        </section>
-      </AppLayout>
+      <section>
+        <img src='/dev-twitter-logo.png' alt='logo' />
+        <h1>Dev-twitter</h1>
+        <h2>Talk about development with developers 👥</h2>
+        <div>
+          {user === USER_STATES.NOT_LOGGED && (
+            <Button onClick={handleClick}>
+              <GitHub fill='#fff' width={32} height={24} /> Login with Github
+            </Button>
+          )}
+          {user === USER_STATES.NOT_KNOWN && <img src='/spinner.gif' />}
+        </div>
+      </section>
       <style jsx>{`
         section {
           display: grid;
