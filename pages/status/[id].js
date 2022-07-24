@@ -1,6 +1,9 @@
 import Devit from 'components/Devit';
+import { useRouter } from 'next/router';
 
 export default function DevitPage(props) {
+  const router = useRouter();
+  if (router.isFallback) return 'Loading...';
   return (
     <>
       <Devit {...props} />
@@ -11,7 +14,7 @@ export default function DevitPage(props) {
 
 export async function getStaticPaths() {
   return {
-    paths: [{ params: { id: '5vTjfsVqigjSKU274iji' } }],
+    paths: [{ params: { id: 'iilyZT8tPtJH6ymca2Jw' } }],
     fallback: true,
   };
 }

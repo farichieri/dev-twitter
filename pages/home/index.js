@@ -1,5 +1,5 @@
 import Devit from 'components/Devit';
-import { fetchLatestDevits } from '../../firebase/client';
+import { fetchLatestDevits, listenLatestDevits } from '../../firebase/client';
 import useUser from 'hooks/useUser';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
@@ -14,10 +14,15 @@ export default function HomePage() {
   const user = useUser();
 
   useEffect(() => {
-    user &&
-      fetchLatestDevits().then((result) =>
+    if (user) {
+      listenLatestDevits((result) =>
         setTimeline(result.sort((a, b) => b.createdAt - a.createdAt))
       );
+    }
+    // user &&
+    //   fetchLatestDevits().then((result) =>
+    //     setTimeline(result.sort((a, b) => b.createdAt - a.createdAt))
+    //   );
   }, [user]);
 
   return (

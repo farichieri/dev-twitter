@@ -11,6 +11,7 @@ import {
   getFirestore,
   Timestamp,
   getDocs,
+  onSnapshot,
 } from 'firebase/firestore';
 import { getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 
@@ -72,21 +73,30 @@ export const addDevit = async ({ avatar, content, img, userId, userName }) => {
   });
 };
 
-export const fetchLatestDevits = async () => {
-  return await getDocs(collection(db, 'devits')).then((docs) => {
-    return docs.docs.map((doc) => {
-      const data = doc.data();
-      const id = doc.id;
-      const { createdAt } = data;
+const mapDevitFromFirebaseToDevitObject = (doc) => {
+  const data = doc.data();
+  const id = doc.id;
+  const { createdAt } = data;
 
-      return {
-        ...data,
-        id,
-        createdAt: +createdAt.toDate(),
-      };
-    });
+  return {
+    ...data,
+    id,
+    createdAt: +createdAt.toDate(),
+  };
+};
+
+export const listenLatestDevits = (callback) => {
+  return onSnapshot(collection(db, 'devits'), ({ docs }) => {
+    const newDevits = docs.map(mapDevitFromFirebaseToDevitObject);
+    callback(newDevits);
   });
 };
+
+// export const fetchLatestDevits = async () => {
+//   return await getDocs(collection(db, 'devits')).then((docs) => {
+//     return docs.docs.map(mapDevitFromFirebaseToDevitObject);
+//   });
+// };
 
 const storage = getStorage();
 
