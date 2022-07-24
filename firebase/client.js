@@ -92,11 +92,11 @@ export const listenLatestDevits = (callback) => {
   });
 };
 
-// export const fetchLatestDevits = async () => {
-//   return await getDocs(collection(db, 'devits')).then((docs) => {
-//     return docs.docs.map(mapDevitFromFirebaseToDevitObject);
-//   });
-// };
+export const fetchLatestDevits = async () => {
+  return await getDocs(collection(db, 'devits')).then((docs) => {
+    return docs.docs.map(mapDevitFromFirebaseToDevitObject);
+  });
+};
 
 const storage = getStorage();
 

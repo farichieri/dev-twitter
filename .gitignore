@@ -33,6 +33,7 @@ yarn-error.log*
 
 # Environment vars
 .env
+.env.local
 
 .eslintcache
 /.husky
